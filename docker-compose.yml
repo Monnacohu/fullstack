@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # Servicio para Pacientes
+  db-patient:
+    image: mysql:8.0
+    container_name: mysql-patient
+    restart: always
+    environment:
+      MYSQL_DATABASE: patient_db
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: user_patient
+      MYSQL_PASSWORD: patient_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - patient_data:/var/lib/mysql
+
+  # Servicio para Historial Médico
+  db-medical-history:
+    image: mysql:8.0
+    container_name: mysql-medicalhistory
+    restart: always
+    environment:
+      MYSQL_DATABASE: medicalhistory_db
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: user_history
+      MYSQL_PASSWORD: history_pass
+    ports:
+      - "3308:3306"
+    volumes:
+      - history_data:/var/lib/mysql
+
+  # Servicio para Consultas
+  db-consultation:
+    image: mysql:8.0
+    container_name: mysql-consultation
+    restart: always
+    environment:
+      MYSQL_DATABASE: consultation_db
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: user_consultation
+      MYSQL_PASSWORD: consultation_pass
+    ports:
+      - "3309:3306"
+    volumes:
+      - consultation_data:/var/lib/mysql
+
+volumes:
+  patient_data:
+  history_data:
+  consultation_data:
